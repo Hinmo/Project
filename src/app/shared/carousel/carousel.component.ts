@@ -1,15 +1,16 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './carousel.component.html',
   styleUrl: './carousel.component.css'
 })
 export class CarouselComponent implements OnInit {
-  ngOnInit(): void {
-    
+
+  ngOnInit(): void {    
     let inicio = 0;
       const carousel = () => {
       let i;
@@ -23,7 +24,6 @@ export class CarouselComponent implements OnInit {
       setTimeout(carousel, 2000);
       }
     carousel();
-
   }
 
 }
