@@ -1,16 +1,45 @@
-<div class="w3-center">
+<div class="w3-center w3-blue">
     <h1>{{titulo}}</h1>
     <p>{{edad}}</p>
+</div>
 
     @if (ocultar) {
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, impedit! Est debitis dolor porro non amet? Quas, dolores cumque. Nobis, sapiente similique? Quae voluptatum ea ut repellendus et, facilis nemo.</p>
+    <p class="w3-auto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, impedit! Est debitis dolor porro non amet? Quas, dolores cumque. Nobis, sapiente similique? Quae voluptatum ea ut repellendus et, facilis nemo.</p>
     }@else {
         <h4>muestra otra cosa</h4>
     }
-</div>
 <div class="w3-center w3-section">
-    <button class="w3-button w3-blue w3-round-large" (click)="mostrarModal()"> modal!</button>
+    <button class="w3-button w3-blue w3-hover-text-blue w3-margin" (click)="mostrarModal()"> modal!</button>
+    <button class="w3-button w3-blue w3-hover-text-blue w3-margin" onclick="document.getElementById('ejemplo').style.display='block'">Otro Modal</button>
 </div>
+<div id="ejemplo" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom w3-card-4">
+        <header class="w3-container w3-theme"> 
+            <h2>Si no lo sé miro Google, sino pues trato de ser creativo</h2>
+        </header>
+        <div class="w3-container">
+            <img src="Images/tarea.jpg" alt="tarea">
+            <form class="w3-container w3-row-padding">
+                <div class="w3-half">
+                    <label><b>Primer número</b></label>
+                    <input class="w3-input w3-border w3-margin-bottom" type="number" placeholder="Ingresa un número" id="num1" name="num1" required>
+                </div>
+                <div class="w3-half">
+                    <label><b>Segundo número</b></label>
+                    <input class="w3-input w3-border w3-margin-bottom" type="number" placeholder="Regalame otro numero no tan lejos del anterior" id="num2" name="num2" required>
+                </div>
+                <button class="w3-button w3-block w3-theme w3-section w3-padding w3-hover-text-theme w3-auto" type="button" onclick="Datos()">Veamos</button>
+            </form>
+            <div class="w3-container w3-theme-d4 w3-margin-bottom">
+                <p id="tarea"></p>
+            </div>
+        </div>
+        <div class="w3-container w3-theme-l4 w3-padding">
+            <button class="w3-button w3-right w3-theme w3-border w3-hover-text-theme" onclick="document.getElementById('ejemplo').style.display='none'">Cerrar</button>
+            </div>
+    </div>
+</div>
+
 <table class="w3-table-all w3-auto">
     <thead>
         <tr class="w3-red">
