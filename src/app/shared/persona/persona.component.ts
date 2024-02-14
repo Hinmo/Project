@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-persona',
   standalone: true,
-  imports: [],
+  imports: [FormsModule, CommonModule],
   templateUrl: './persona.component.html',
   styleUrl: './persona.component.css'
 })
@@ -31,7 +33,37 @@ export class PersonaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    
+  }
+
+  sumaPrimo: number | null = null;
+
+  calculatePrimeSum(values: { num1: number, num2: number }): void {
+    let num1 = values.num1;
+    let num2 = values.num2;
+    let min = Math.min(num1, num2);
+    let max = Math.max(num1, num2);
+    let sum = 0;
+
+    for (let i = min; i <= max; i++) {
+      if (this.esPrimo(i)) {
+        sum += i;
+      }
+    }
+
+    this.sumaPrimo = sum;
+  }
+
+  esPrimo(num: number): boolean {
+    if (num <= 1) {
+      return false;
+    }
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+      if (num % i === 0) {
+        return false;
+      }
+    }
+    return true;
   }
 
 }
