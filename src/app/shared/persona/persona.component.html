@@ -38,19 +38,17 @@
     </div>
 </div>
 
-<table class="w3-table-all w3-auto">
-    <thead>
-        <tr class="w3-red">
-        <th>ID</th>
-        <th>Nombre</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (user of users; track $index) {
-        <tr> 
-        <td>{{user.id}}</td>
-        <td>{{user.name}}</td>
-        </tr>
-    }
-    </tbody>
-  </table>
+<app-table
+    [users]="users"
+    [tituloTabla]="tituloTabla"
+></app-table>
+
+<div class="w3-center w3-blue">
+    <h1>Este es el contador</h1>
+    <app-counter
+    
+        (counter)="counterReceptor($event)"
+    
+    ></app-counter>
+    <p>subiendo.... = {{ counter }}</p>
+</div>

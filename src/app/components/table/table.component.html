@@ -1,22 +1,20 @@
+<div class="w3-blue w3-center">
+    <h1>{{ tituloTabla }}</h1>
+</div>
+
 <table class="w3-table-all w3-auto">
     <thead>
         <tr class="w3-red">
-            <th>Empresa</th>
-            <th>Nombre</th>
+        <th>ID</th>
+        <th>Nombre</th>
         </tr>
     </thead>
     <tbody>
+        @for (user of users; track $index) {
         <tr> 
-            <td>cosa 1</td>
-            <td>cosa 2</td>
+        <td>{{user.id}}</td>
+        <td>{{user.name}}</td>
         </tr>
-        <tr> 
-            <td>cosa 1</td>
-            <td>cosa 2</td>
-        </tr>
-        <tr> 
-            <td>cosa 1</td>
-            <td>cosa 2</td>
-        </tr>
+    }
     </tbody>
   </table>

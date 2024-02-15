@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from "../../shared/header/header.component";
 import { MenuComponent } from "../../shared/menu/menu.component";
 import { CarouselComponent } from "../../shared/carousel/carousel.component";
-import { TableComponent } from "../../components/table/table.component";
 import { PersonaComponent } from "../../shared/persona/persona.component";
 import { FooterComponent } from "../../shared/footer/footer.component";
 
@@ -11,7 +10,7 @@ import { FooterComponent } from "../../shared/footer/footer.component";
     standalone: true,
     templateUrl: './home.component.html',
     styleUrl: './home.component.css',
-    imports: [HeaderComponent, MenuComponent, CarouselComponent, TableComponent, PersonaComponent, FooterComponent]
+    imports: [HeaderComponent, MenuComponent, CarouselComponent, PersonaComponent, FooterComponent]
 })
 export class HomeComponent {
 
