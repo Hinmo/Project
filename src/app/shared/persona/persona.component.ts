@@ -69,10 +69,10 @@ export class PersonaComponent implements OnInit {
     return true;
   }
 
-  counter: number=0;
+  receptor: number=0;
 
   counterReceptor(numero:number){
-    this.counter=numero;
+    this.receptor=numero;
   }
 
 }
