@@ -12,32 +12,6 @@
     <button class="w3-button w3-blue w3-hover-text-blue w3-margin w3-border" (click)="mostrarModal()"> modal!</button>
     <button class="w3-button w3-blue w3-hover-text-blue w3-margin w3-border" onclick="document.getElementById('ejemplo').style.display='block'">Otro Modal</button>
 </div>
-<div id="ejemplo" class="w3-modal">
-    <div class="w3-modal-content w3-animate-zoom w3-card-4">
-        <header class="w3-container w3-blue w3-center"> 
-            <h2>Si no lo sé miro Google, sino pues trato de ser creativo</h2>
-        </header>
-        <div class="w3-container w3-center">
-            <img src="./assets/img/tarea.jpg" alt="tarea">
-            <form #form="ngForm" (ngSubmit)="calculatePrimeSum(form.value)">
-                <label><b>Numero 1:</b></label>
-                <input class="w3-input w3-border w3-margin-bottom" type="number" id="num1" name="num1" ngModel required>
-                
-                <label><b>Numero 2:</b></label>
-                <input class="w3-input w3-border w3-margin-bottom" type="number" id="num2" name="num2" ngModel required>
-                
-                <button class="w3-button w3-blue w3-section w3-padding w3-hover-text-blue w3-center" type="submit">Veamos!</button>
-            </form>              
-            <div *ngIf="sumaPrimo !== null">
-                <p>la suma de los numeros primos del intervalo es: {{ sumaPrimo }}</p>
-            </div>
-        </div>
-        <div class="w3-container w3-theme-l4 w3-padding">
-            <button class="w3-button w3-right w3-blue w3-border w3-hover-text-blue" onclick="document.getElementById('ejemplo').style.display='none'">Cerrar</button>
-            </div>
-    </div>
-</div>
-
 <app-table
     [users]="users"
     [tituloTabla]="tituloTabla"
@@ -51,4 +25,29 @@
     
     ></app-counter>
     <p>subiendo.... = {{ receptor }}</p>
+</div>
+
+
+<button (click)="openModal()" class="bg-blue-500 text-white px-4 py-2 rounded-md">Magia</button>
+
+<div *ngIf="isModalOpen" class="fixed inset-0 flex items-center justify-center">
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="relative bg-white p-8 rounded-lg max-w-md">
+    <h2 class="text-xl font-bold mb-4">Suma de numeros primos de un array</h2>
+    <form (submit)="calculatePrimeSum()">
+      <div class="mb-4">
+        <label for="num1" class="block mb-1">Numero 1:</label>
+        <input type="number" id="num1" name="num1" [(ngModel)]="num1" class="w-full px-3 py-2 border rounded-md">
+      </div>
+      <div class="mb-4">
+        <label for="num2" class="block mb-1">Numero 2:</label>
+        <input type="number" id="num2" name="num2" [(ngModel)]="num2" class="w-full px-3 py-2 border rounded-md">
+      </div>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Veamos</button>
+    </form>
+    <div *ngIf="sumaPrimo !== null" class="mt-4">
+      <p>la de primos entre {{ num1 }} y {{ num2 }} es: {{ sumaPrimo }}</p>
+    </div>
+    <button (click)="closeModal()" class="mt-4 text-gray-600">Cerrar</button>
+  </div>
 </div>

@@ -39,13 +39,31 @@ export class PersonaComponent implements OnInit {
     
   }
 
+  //mi modal
+  isModalOpen = false;
+  num1: number | null = null;
+  num2: number | null = null;
   sumaPrimo: number | null = null;
 
-  calculatePrimeSum(values: { num1: number, num2: number }): void {
-    let num1 = values.num1;
-    let num2 = values.num2;
-    let min = Math.min(num1, num2);
-    let max = Math.max(num1, num2);
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    this.num1 = null;
+    this.num2 = null;
+    this.sumaPrimo = null;
+  }
+
+  calculatePrimeSum() {
+    if (this.num1 === null || this.num2 === null) {
+      // Handle invalid input
+      return;
+    }
+
+    let min = Math.min(this.num1, this.num2);
+    let max = Math.max(this.num1, this.num2);
     let sum = 0;
 
     for (let i = min; i <= max; i++) {
@@ -68,11 +86,15 @@ export class PersonaComponent implements OnInit {
     }
     return true;
   }
+  //fin modal funciones
+
 
   receptor: number=0;
 
   counterReceptor(numero:number){
     this.receptor=numero;
   }
+
+  
 
 }
