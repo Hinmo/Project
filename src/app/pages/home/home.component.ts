@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CarouselComponent } from "../../shared/carousel/carousel.component";
 import { PersonaComponent } from "../../shared/persona/persona.component";
 
 @Component({
@@ -7,7 +6,7 @@ import { PersonaComponent } from "../../shared/persona/persona.component";
     standalone: true,
     templateUrl: './home.component.html',
     styleUrl: './home.component.css',
-    imports: [CarouselComponent, PersonaComponent]
+    imports: [PersonaComponent]
 })
 export class HomeComponent {
 
