@@ -1,29 +1,40 @@
-<header class="bg-orange-500 text-sky-100 font-mono">
-    <section class="mx-auto flex flex-col max-w-6xl justify-between relative text-sky-100">
-        <div class="flex items-center">
-            <img src="./assets/img/logo.png" alt="Logo" class="w-24 h-auto mt-10">
-            <div>
-                <h1 class="text-6xl mt-10">Proyecto Estudio</h1>
-                <h4 class="mt-2">Una oportunidad de crecer</h4>
-            </div>
-        </div>
-        <nav class="hidden lg:block space-x-8 text-lg absolute top-0 right-4">
-            <a routerLink="" class="hover:opacity-80">Inicio</a>
-            <a routerLink="qsomos" class="hover:opacity-80">Quienes Somos</a>
-            <a routerLink="acerca" class="hover:opacity-80">Acerca de</a>
-            <a routerLink="contacto" class="hover:opacity-80 ">Contacto</a>
+<header class="bg-sky-900 text-sky-100 font-mono sticky top-0 font-bold">
+    <section class="mx-auto max-w-6xl justify-between relative text-sky-100 flex items-center">
+        <a routerLink="" class="inline-flex my-4  hover:text-orange-500">
+          <img src="./assets/img/logo.png" alt="Logo" class="w-20">
+          <h1 class="text-4xl">Proyecto Estudio</h1>            
+        </a>
+        <nav class="hidden lg:block">            
+            <a routerLink="qsomos" class=" hover:text-orange-500 py-2 px-6">Quienes Somos</a>
+            <a routerLink="clientes" class=" hover:text-orange-500 py-2 px-6">Clientes</a>
+            <a routerLink="acerca" class= "hover:text-orange-500 py-2 px-6">Acerca de</a>
+            <a routerLink="contacto" class=" hover:text-orange-500 py-2 px-6">Contacto</a>
         </nav>
-        <nav class="hidden lg:block space-x-4 absolute bottom-0 right-4">
-            <a href="" class="hover:opacity-80 text-xl"><i class="fa-brands fa-square-facebook"></i></a>
-            <a href="" class="hover:opacity-80 text-xl"><i class="fa-brands fa-square-twitter"></i></a>
-            <a href="" class="hover:opacity-80 text-xl"><i class="fa-brands fa-instagram"></i></a>
-            <a href="" class="hover:opacity-80 text-xl"><i class="fa-brands fa-google"></i></a>
-            <a href="" class="hover:opacity-80 text-xl"><i class="fa-brands fa-linkedin-in"></i></a>
-        </nav>
-        <div class="hidden lg:block text-center my-10">
-            <h2 class="text-4xl">CRM</h2>
-            <p><b>Innovar, mejorar y ampliar</b> el rendimiento de tu empresa siempre será algo que puedes hacer.</p>
-            <p><b>Crea, gestiona, registra, almacena y visualiza</b> toda la informacion relacionada con tus clientes y empresa en un mismo sitio.</p>
-        </div>
+        <a (click)="aModal()" class="flex space-x-2  hover:text-orange-500"><i class="fa-regular fa-circle-user text-4xl"></i><p class=" mt-2">Login</p></a>
     </section>
 </header>
+
+<div *ngIf="isModalOpen" class="fixed inset-0 flex items-center justify-center">
+  <div class="absolute inset-0 bg-black opacity-50"></div>
+  <div class="relative bg-white p-8 rounded-lg max-w-md text-sky-900">
+    <div class="bg-sky-900 p-2 rounded-full w-20 h-20 flex items-center justify-center mb-4">
+        <img src="./assets/img/logo.png" alt="">
+    </div>
+    <form class="login-form">
+      <div class="form-group mb-4">
+        <label class="block">Nombre de Usuario:</label>
+        <input type="text" id="name" name="name" class="border border-sky-900 rounded px-3 py-2 w-full" required>
+      </div>
+      <div class="form-group mb-4">
+        <label class="block">Contraseña:</label>
+        <input type="password" id="password" name="password" class="border border-sky-900 rounded px-3 py-2 w-full" required>
+        <p class="text-xs p-2">¿Has olvidado tu contraseña? <a class="text-orange-500">Click aqui</a></p>
+      </div>
+      <div class="flex justify-between mb-4">
+        <button type="submit" class="bg-sky-900 text-sky-100 rounded px-4 py-2">Ingresa</button>
+        <button class="bg-sky-900 text-sky-100 rounded px-4 py-2">Regístrate</button>
+      </div>
+    </form>   
+    <button (click)="cModal()" class="absolute text-4xl text-sky-900 top-6 right-6 hover:text-orange-500"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+</div>

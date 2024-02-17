@@ -39,56 +39,6 @@ export class PersonaComponent implements OnInit {
     
   }
 
-  //mi modal
-  isModalOpen = false;
-  num1: number | null = null;
-  num2: number | null = null;
-  sumaPrimo: number | null = null;
-
-  openModal() {
-    this.isModalOpen = true;
-  }
-
-  closeModal() {
-    this.isModalOpen = false;
-    this.num1 = null;
-    this.num2 = null;
-    this.sumaPrimo = null;
-  }
-
-  calculatePrimeSum() {
-    if (this.num1 === null || this.num2 === null) {
-      // Handle invalid input
-      return;
-    }
-
-    let min = Math.min(this.num1, this.num2);
-    let max = Math.max(this.num1, this.num2);
-    let sum = 0;
-
-    for (let i = min; i <= max; i++) {
-      if (this.esPrimo(i)) {
-        sum += i;
-      }
-    }
-
-    this.sumaPrimo = sum;
-  }
-
-  esPrimo(num: number): boolean {
-    if (num <= 1) {
-      return false;
-    }
-    for (let i = 2; i <= Math.sqrt(num); i++) {
-      if (num % i === 0) {
-        return false;
-      }
-    }
-    return true;
-  }
-  //fin modal funciones
-
-
   receptor: number=0;
 
   counterReceptor(numero:number){

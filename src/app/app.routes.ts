@@ -3,6 +3,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { AcercaComponent } from './pages/acerca/acerca.component';
 import { QsomosComponent } from './pages/qsomos/qsomos.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
+import { VClientesComponent } from './pages/clientes/v-clientes/v-clientes.component';
 
 export const routes: Routes = [
     {
@@ -24,6 +25,11 @@ export const routes: Routes = [
     path:'contacto',
     title: 'Contacto',
     component: ContactoComponent, 
+    },
+    {
+    path:'clientes',
+    title: 'vClientes',
+    component: VClientesComponent, 
     },
 
 ];
