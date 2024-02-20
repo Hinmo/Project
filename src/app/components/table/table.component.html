@@ -1,20 +1,22 @@
-<div class="w3-blue w3-center">
-    <h1>{{ tituloTabla }}</h1>
+<div class="overflow-x-auto">
+    <table class="w-full flex flex-row my-5 text-sm sm:table">
+        <thead class="text-sky-100">
+            @for (item of data; track $index) {
+            <tr class="bg-sky-900 flex flex-col sm:table-row sm:rounded-none mb-2 sm:mb-0">
+                @for (column of header; track $index) {
+                <th class="p-2 border border-sky-100">{{headerMapping[column]}}</th>
+                }
+            </tr>
+            }
+        </thead>
+        <tbody class="flex-1 sm:flex-none">
+            @for (item of data; track $index) {
+            <tr class="flex flex-col sm:table-row mb-2 sm:mb-0 md:odd:bg-slate-100 text-sky-900"> 
+                @for (column of header; track $index) {
+                <td class="p-2 border border-sky-900">{{ item[column] }}</td>
+                }
+            </tr>
+            }
+        </tbody>
+    </table>
 </div>
-
-<table class="w3-table-all w3-auto">
-    <thead>
-        <tr class="w3-red">
-        <th>ID</th>
-        <th>Nombre</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (user of users; track $index) {
-        <tr> 
-        <td>{{user.id}}</td>
-        <td>{{user.name}}</td>
-        </tr>
-    }
-    </tbody>
-  </table>

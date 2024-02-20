@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { TableComponent } from "../../components/table/table.component";
 import { CounterComponent } from "../../components/counter/counter.component";
+import { User } from '../../core/interfaces/user';
 
 @Component({
     selector: 'app-persona',
@@ -16,10 +17,8 @@ export class PersonaComponent implements OnInit {
 
   titulo: string= "Componente Persona";
   edad: number= 36;
-  ocultar: boolean= true;
-  tituloTabla: string= "Titulo Padre";
 
-  users: { id: number; name: string }[] = [
+  users: User[] = [
     { id: 0, name: 'Lore' },
     { id: 1, name: 'Brayan' },
     { id: 2, name: 'Mario' },

@@ -8,6 +8,7 @@ import { Component, Input } from '@angular/core';
   styleUrl: './table.component.css'
 })
 export class TableComponent {
-  @Input() users: { id: number; name: string }[]=[];
-  @Input() tituloTabla: string = "";
+  @Input() headerMapping: { [key: string]: string } = {};
+  @Input() header: string[] | undefined;
+  @Input() data: any[] = [];
 }
