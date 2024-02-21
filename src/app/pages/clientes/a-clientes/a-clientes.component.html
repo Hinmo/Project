@@ -1,1 +1,56 @@
-<p>a-clientes works!</p>
+<div class="text-sky-900">
+    <h2 class="text-center text-2xl font-semibold mb-6">Ingresar Datos</h2>
+    <form [formGroup]="clientForm" (submit)="onSubmit()">
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="sm:w-1/2 px-2 mb-6 md:mb-0">
+                <label for="id" class="block text-sm font-bold mb-2">ID:</label>
+                <input type="number" formControlName="id" class="appearance-none border rounded py-2 px-2 leading-tight" required>
+            </div>
+            <div class="sm:w-1/2 px-2">
+                <label for="nombre" class="block text-sm font-bold mb-2">Nombre:</label>
+                <input type="text" id="nombre" formControlName="nombre" class="appearance-none border rounded py-2 px-2 leading-tight" required>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="sm:w-1/2 px-2 mb-6 md:mb-0">
+                <label for="direccion" class="block text-sm font-bold mb-2">Dirección:</label>
+                <input type="text" id="direccion" formControlName="direccion" class="appearance-none border rounded py-2 px-2 leading-tight" required>
+            </div>
+            <div class="sm:w-1/2 px-2">
+                <label for="telefono" class="block text-sm font-bold mb-2">Teléfono:</label>
+                <input type="number" id="telefono" formControlName="telefono" class="appearance-none border rounded py-2 px-2 leading-tight" required>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="sm:w-1/2 px-2 mb-6 md:mb-0">
+                <label for="email" class="block text-sm font-bold mb-2">Email:</label>
+                <input type="email" id="email" formControlName="email" class="appearance-none border rounded py-2 px-2 leading-tight" required>
+            </div>
+            <div class="sm:w-1/2 px-2">
+                <label for="tDocumento" class="block text-sm font-bold mb-2">Tipo de Documento:</label>
+                <select id="tDocumento" formControlName="tDocumento" class="appearance-none border rounded py-2 px-2 leading-tight" required>
+                    <option value="CC">Cédula de ciudadanía</option>
+                    <option value="CE">Cédula de extranjería</option>
+                    <option value="P">Pasaporte</option>
+                </select>
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3 mb-6">
+            <div class="sm:w-1/2 px-2 mb-6 md:mb-0">
+                <label for="nDocumento" class="block text-sm font-bold mb-2">Número de Documento:</label>
+                <input type="text" id="nDocumento" formControlName="nDocumento" class="appearance-none border rounded py-2 px-2 leading-tight" required>
+            </div>
+            <div class="sm:w-1/2 px-2">
+                <label for="estado" class="block text-sm font-bold mb-2">Estado:</label>
+                <select id="estado" formControlName="estado" class="appearance-none border rounded py-2 px-2 leading-tight" required>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                </select>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <button type="submit" class="bg-sky-900 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded">Crear</button>
+        </div>
+    </form>
+</div>
+
