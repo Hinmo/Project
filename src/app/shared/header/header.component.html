@@ -7,16 +7,19 @@
     <nav class="hidden lg:block space-x-6 space-y-2">
       <a routerLink="qsomos" class=" hover:text-orange-500 ">Quiénes somos</a>
       <a routerLink="clientes" class=" hover:text-orange-500 ">Servicios</a>
-      <a routerLink="acerca" class= "hover:text-orange-500 ">Acerca de</a>
       <a routerLink="contacto" class=" hover:text-orange-500 ">Contacto</a>
     </nav>
-    <a (click)="aModal()" class="hidden lg:flex space-x-2  hover:text-orange-500 pr-4 cursor-pointer"><i class="fa-regular fa-circle-user text-4xl"></i><p class=" mt-2">Login</p></a>
+    <a class="hidden lg:flex space-x-2 hover:text-orange-500 pr-4 cursor-pointer relative">
+      <i class="fa-solid fa-magnifying-glass text-3xl"></i>
+      <input type="text" class="mt-1 h-full w-32 bg-gray-200 rounded-r border border-gray-300 px-2 focus:outline-none focus:border-gray-500 text-sky-900" placeholder="Buscar...">
+    </a>
+    <a (click)="aModal()" class="hidden lg:flex space-x-2  hover:text-orange-500 pr-4 cursor-pointer"><i class="fa-regular fa-circle-user text-3xl"></i><p class=" mt-2"></p></a>
   </section>
 </header>
 
 @if (isModalOpen) {
   <div class="fixed inset-0 flex items-center justify-center z-20">
-    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <div class="absolute inset-0 bg-black opacity-80"></div>
     <div class="relative bg-white p-8 rounded-lg max-w-md text-sky-900">
       <div class="bg-sky-900 p-2 rounded-full w-20 h-20 flex items-center justify-center mb-4">
         <img src="./assets/img/logo.png" alt="">
