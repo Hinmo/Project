@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Cliente } from '../../core/interfaces/cliente';
 
 @Component({
   selector: 'app-table',
@@ -13,14 +14,22 @@ export class TableComponent {
   @Input() data: any[] = [];
   @Input() showAction: Boolean = false;
   /* @Output() deleteClientEvent = new EventEmitter<number>(); */
+  @Output() editClientEvent = new EventEmitter<any>();
+
+  //editar
+
+  editClient(client:Cliente):void{
+    console.log("CLIENT",client)
+    this.editClientEvent.emit(client)
+  }
 
   //eliminar
-  action2(idItem: number): void {
+  action2(deleteItem: any): void {
     
     const confirmacion = confirm('¿Estás seguro de que quieres eliminar este elemento?');
     if (confirmacion) {
     this.data = this.data.filter(
-        (data) => data.id !== idItem
+        (data) => data !== deleteItem
       );
     }
 
@@ -29,8 +38,8 @@ export class TableComponent {
 
     /* this.deleteClientEvent.emit(idItem); */
   }
-}
 
+  
 /* action2(idItem: number): void {
   const index = this.data.findIndex(data => data.id === idItem);
   if (index !== -1) {
@@ -40,3 +49,5 @@ export class TableComponent {
       ];
   }
 } */
+
+}

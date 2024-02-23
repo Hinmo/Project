@@ -1,0 +1,12 @@
+@if (isOpen) {
+    <div class="fixed inset-0 flex items-center justify-center z-20">
+        <div class="absolute inset-0 bg-black opacity-80"></div>
+        <div class="relative bg-white p-8 rounded-lg max-w-lg text-sky-900">
+          <div class="bg-sky-900 p-2 rounded-full w-20 h-20 flex items-center justify-center mb-4">
+            <img src="./assets/img/logo.png" alt="">
+          </div>
+          <ng-content></ng-content>
+          <button (click)="cModal()" class="absolute text-4xl top-6 right-6 hover:text-orange-500"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+}

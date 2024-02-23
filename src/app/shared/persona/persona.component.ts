@@ -5,13 +5,14 @@ import Swal from 'sweetalert2';
 import { TableComponent } from "../../components/table/table.component";
 import { CounterComponent } from "../../components/counter/counter.component";
 import { User } from '../../core/interfaces/user';
+import { ModalComponent } from "../../components/modal/modal.component";
 
 @Component({
     selector: 'app-persona',
     standalone: true,
     templateUrl: './persona.component.html',
     styleUrl: './persona.component.css',
-    imports: [FormsModule, CommonModule, TableComponent, CounterComponent]
+    imports: [FormsModule, CommonModule, TableComponent, CounterComponent, ModalComponent]
 })
 export class PersonaComponent implements OnInit {
 
@@ -19,20 +20,12 @@ export class PersonaComponent implements OnInit {
   edad: number= 36;
 
   users: User[] = [
-    { id: 0, name: 'Lore' },
-    { id: 1, name: 'Brayan' },
-    { id: 2, name: 'Mario' },
-    { id: 3, name: 'Giova' },
-    { id: 4, name: 'Barbie' },
+    { identificacion: 0, name: 'Lore' },
+    { identificacion: 1, name: 'Brayan' },
+    { identificacion: 2, name: 'Mario' },
+    { identificacion: 3, name: 'Giova' },
+    { identificacion: 4, name: 'Barbie' },
   ];
-
-  mostrarModal(): void{
-    Swal.fire({
-      title: "The Internet?",
-      text: `That thing is still around? ${this.titulo}`,
-      icon: "question"
-    });
-  }
 
   ngOnInit(): void {
     
@@ -44,6 +37,16 @@ export class PersonaComponent implements OnInit {
     this.receptor=numero;
   }
 
+  //modalReutilizable
+  isModalOpen: boolean = false;
+
+  openModal() {
+    this.isModalOpen = true;
+  }
+
+  onModalClose() {
+    this.isModalOpen = false;
+  }
   
 
 }

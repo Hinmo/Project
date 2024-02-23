@@ -20,8 +20,8 @@
                 }
                 @if (showAction) {
                 <td class="p-2 border border-sky-900">
-                    <button class="bg-sky-900 hover:bg-green-400 hover:text-sky-900 text-white font-bold py-1 px-2 mr-1 rounded"><i class="fa-regular fa-pen-to-square"></i></button>
-                    <button class="bg-orange-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded" (click)="action2(item.id)"><i class="fa-solid fa-trash"></i></button>
+                    <button class="bg-sky-900 hover:bg-green-400 hover:text-sky-900 text-white font-bold py-1 px-2 mr-1 rounded" (click)="editClient(item)" ><i class="fa-regular fa-pen-to-square"></i></button>
+                    <button class="bg-orange-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded" (click)="action2(item)"><i class="fa-solid fa-trash"></i></button>
                 </td>
                 }
             </tr>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../../../core/interfaces/cliente';
 import { TableComponent } from '../../../components/table/table.component';
 import { AClientesComponent } from '../a-clientes/a-clientes.component';
-
+//
 @Component({
   selector: 'app-v-clientes',
   standalone: true,
@@ -34,6 +34,7 @@ export class VClientesComponent implements OnInit {
   };
 
   misClientes: Cliente[] = [];
+  clienteEnEdicion: Cliente | null = null;
 
   ngOnInit(): void {
     this.misClientes.push(
@@ -83,18 +84,54 @@ export class VClientesComponent implements OnInit {
 
   cModal() {
     this.isModalOpen = false;
+    this.clienteEnEdicion = null;
   }
   //fin modal funciones
 
+  editarCliente(cliente: Cliente): void {
+    this.clienteEnEdicion = cliente;
+    this.isModalOpen = true;
+  }
+
   // revisar
   agregarCliente(cliente: Cliente) {
-    this.misClientes = [...this.misClientes, cliente];
+
+
+    /*
+    Bueno como puedes ver se creo una nueva variable  "clienteEnEdicion"
+    en esta variable se guarda el objeto que nos envia la tabla.
+
+    entonces lo que estamos haciendo aqui, para no tener que crear un modal nuevo
+    ya que el form es el mismo 
+    es preguntar hay algun cliente en edicion?
+    si no lo hay pues seguimos el  pa
+
+que es crear un cliente los pasaos que ya haciamos normalemnte
+    pero si cliente en edicion es true
+    quiere decir que  el modal , esta en modo editar, mas no en modo crear
+    por lo tanto lo que hacemos e buscar el cliente que no mando
+    la tabla en el arreglo de clientes
+    y ponerlo en el lugar que ocupa y luego liberar  esa variable con un null    lamon o
+
+    */
+    if (this.clienteEnEdicion) {                      
+      const index = this.misClientes.findIndex(
+        (cliente) => cliente.id === this.clienteEnEdicion?.id         //aqui comprueba si el modal esta en edicion
+      );
+      if (index !== -1) {
+        this.misClientes[index] = cliente;                          //aqui llenas con la info el modal y le reasignas el valor nuevo de haber cambios
+        this.clienteEnEdicion = null;
+      }
+    } else {
+      this.misClientes = [...this.misClientes, cliente];//proceso normal de creacion
+    }
     this.cModal();
   }
 
- /*  deleteClient(idCliente: number): void {
+  /*  deleteClient(idCliente: number): void {
     this.misClientes = this.misClientes.filter(
       (cliente) => cliente.id !== idCliente
     );
   } */
+
 }
