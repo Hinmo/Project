@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Cliente } from '../../../core/interfaces/cliente';
 
 @Component({
@@ -16,15 +16,9 @@ export class AClientesComponent implements OnInit {
   clienteForm: FormGroup = {} as FormGroup;
 
   constructor(private fb: FormBuilder) {}
-//AQUI LO QUE HICE ES decirle al form que sirva para editar y crear , es decir que ya puede venir informacion o no   aaamigooo, esta es la magia por la q yo preguntaba
- 
-//A ESTE TIPO DE COSAS ME REFIERO CUANDO TE DIGO QUE PROGRAMES UNIVERSAL
-// SI HUBISEMOS TENIDO UN FORM DINAMICO Y UN MODAL DINAMICO IMAGINA LAS POSIBILIDADES
 
-//PERO BUENO CON ETO YA PUEDE SEGUIR      pues tengo trabajo, 
-
-
-ngOnInit(): void {
+  ngOnInit(): void {
+    
     this.clienteForm = this.fb.group({
       id: [this.cliente?.id || '', [Validators.required]],
       nombre: [this.cliente?.nombre || '', [Validators.required]],

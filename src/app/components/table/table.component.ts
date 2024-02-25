@@ -13,41 +13,22 @@ export class TableComponent {
   @Input() header: string[] = [];
   @Input() data: any[] = [];
   @Input() showAction: Boolean = false;
-  /* @Output() deleteClientEvent = new EventEmitter<number>(); */
   @Output() editClientEvent = new EventEmitter<any>();
 
-  //editar
-
+  //editar  
   editClient(client:Cliente):void{
     console.log("CLIENT",client)
     this.editClientEvent.emit(client)
   }
 
   //eliminar
-  action2(deleteItem: any): void {
-    
-    const confirmacion = confirm('¿Estás seguro de que quieres eliminar este elemento?');
-    if (confirmacion) {
-    this.data = this.data.filter(
-        (data) => data !== deleteItem
-      );
+  action2(deleteItem: any): void {    
+    const confirmacion = confirm(`¿Estás seguro de que quieres eliminar el elemento?`);
+      if (confirmacion) {
+        const index = this.data.indexOf(deleteItem);
+      if (index !== -1) {
+        this.data.splice(index, 1);
+      }
     }
-
-   /* const newData = [...this.data];
-    this.data = newData.filter((data) => data.id !== idItem); */
-
-    /* this.deleteClientEvent.emit(idItem); */
   }
-
-  
-/* action2(idItem: number): void {
-  const index = this.data.findIndex(data => data.id === idItem);
-  if (index !== -1) {
-      this.data = [
-          ...this.data.slice(0, index),
-          ...this.data.slice(index + 1)
-      ];
-  }
-} */
-
 }

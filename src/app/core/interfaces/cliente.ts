@@ -1,10 +1,10 @@
 export interface Cliente {
-    readonly id:number;
+    readonly id: number;
     nombre: string;
     direccion: string;
     telefono: string;
     email: string;
-    tDocumento:string;
-    nDocumento:string;
-    estado:boolean;
+    tDocumento: string;
+    nDocumento: string;
+    estado: boolean;
 }

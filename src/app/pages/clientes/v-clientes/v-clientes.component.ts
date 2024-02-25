@@ -46,7 +46,7 @@ export class VClientesComponent implements OnInit {
         email: 'jorjuroba@gmail.com',
         tDocumento: 'Cc',
         nDocumento: '1130609314',
-        estado: true,
+        estado: false,
       },
       {
         id: 2,
@@ -69,10 +69,6 @@ export class VClientesComponent implements OnInit {
         estado: true,
       }
     );
-
-    this.misClientes.forEach((cliente) => {
-      console.log('mis clientes', cliente);
-    });
   }
 
   //mi modal
@@ -94,26 +90,7 @@ export class VClientesComponent implements OnInit {
   }
 
   // revisar
-  agregarCliente(cliente: Cliente) {
-
-
-    /*
-    Bueno como puedes ver se creo una nueva variable  "clienteEnEdicion"
-    en esta variable se guarda el objeto que nos envia la tabla.
-
-    entonces lo que estamos haciendo aqui, para no tener que crear un modal nuevo
-    ya que el form es el mismo 
-    es preguntar hay algun cliente en edicion?
-    si no lo hay pues seguimos el  pa
-
-que es crear un cliente los pasaos que ya haciamos normalemnte
-    pero si cliente en edicion es true
-    quiere decir que  el modal , esta en modo editar, mas no en modo crear
-    por lo tanto lo que hacemos e buscar el cliente que no mando
-    la tabla en el arreglo de clientes
-    y ponerlo en el lugar que ocupa y luego liberar  esa variable con un null    lamon o
-
-    */
+  agregarCliente(cliente: Cliente) {   
     if (this.clienteEnEdicion) {                      
       const index = this.misClientes.findIndex(
         (cliente) => cliente.id === this.clienteEnEdicion?.id         //aqui comprueba si el modal esta en edicion
@@ -123,15 +100,8 @@ que es crear un cliente los pasaos que ya haciamos normalemnte
         this.clienteEnEdicion = null;
       }
     } else {
-      this.misClientes = [...this.misClientes, cliente];//proceso normal de creacion
+      this.misClientes = [...this.misClientes, cliente];    //proceso normal de creacion
     }
     this.cModal();
   }
-
-  /*  deleteClient(idCliente: number): void {
-    this.misClientes = this.misClientes.filter(
-      (cliente) => cliente.id !== idCliente
-    );
-  } */
-
 }
