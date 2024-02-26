@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Cliente } from '../../../core/interfaces/cliente';
 import { TableComponent } from '../../../components/table/table.component';
 import { AClientesComponent } from '../a-clientes/a-clientes.component';
@@ -11,6 +11,8 @@ import { AClientesComponent } from '../a-clientes/a-clientes.component';
   imports: [TableComponent, AClientesComponent],
 })
 export class VClientesComponent implements OnInit {
+  @Output() editarClienteEvent = new EventEmitter<Cliente>();
+
   headNames: string[] = [
     'id',
     'nombre',
@@ -36,6 +38,15 @@ export class VClientesComponent implements OnInit {
   misClientes: Cliente[] = [];
   clienteEnEdicion: Cliente | null = null;
 
+  transformarClientesParaTabla(clientes: Cliente[]): any[] {
+    return clientes.map(cliente => {
+      return {
+        ...cliente,
+        estado: cliente.estado ? 'Activo' : 'Inactivo'
+      };
+    });
+  }
+
   ngOnInit(): void {
     this.misClientes.push(
       {
@@ -57,36 +68,12 @@ export class VClientesComponent implements OnInit {
         tDocumento: 'Cc',
         nDocumento: '1130558998',
         estado: true,
-      },
-      {
-        id: 3,
-        nombre: 'Giova',
-        direccion: 'cra 13a 13a-07',
-        telefono: '+57 3052083',
-        email: 'giova@gmail.com',
-        tDocumento: 'Cc',
-        nDocumento: '1130584211',
-        estado: true,
       }
     );
   }
 
-  //mi modal
-  isModalOpen = false;
-
-  aModal() {
-    this.isModalOpen = true;
-  }
-
-  cModal() {
-    this.isModalOpen = false;
-    this.clienteEnEdicion = null;
-  }
-  //fin modal funciones
-
-  editarCliente(cliente: Cliente): void {
+   editarCliente(cliente: Cliente): void {
     this.clienteEnEdicion = cliente;
-    this.isModalOpen = true;
   }
 
   // revisar
@@ -102,6 +89,6 @@ export class VClientesComponent implements OnInit {
     } else {
       this.misClientes = [...this.misClientes, cliente];    //proceso normal de creacion
     }
-    this.cModal();
+    //this.cModal();
   }
 }

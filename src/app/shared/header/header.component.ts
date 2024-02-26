@@ -1,28 +1,24 @@
-
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { ModalComponent } from "../../components/modal/modal.component";
+import { LoginComponent } from "../../auth/login/login.component";
 
 @Component({
-  selector: 'app-header',
-  standalone: true,
-  imports: [RouterLink, FormsModule, CommonModule],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+    selector: 'app-header',
+    standalone: true,
+    templateUrl: './header.component.html',
+    styleUrl: './header.component.css',
+    imports: [RouterLink, ModalComponent, LoginComponent]
 })
 export class HeaderComponent {
 
-    //mi modal
-    isModalOpen = false;
-      
-    aModal() {
-      this.isModalOpen = true;
-    }
-  
-    cModal() {
-      this.isModalOpen = false;
-        }  
-    //fin modal funciones
+  //modalReutilizable
+  isModalOpen: boolean = false;
+  openModal() {
+    this.isModalOpen = true;
+  }
+  onModalClose() {
+    this.isModalOpen = false;
+  }
 
 }

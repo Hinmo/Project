@@ -39,11 +39,9 @@ export class PersonaComponent implements OnInit {
 
   //modalReutilizable
   isModalOpen: boolean = false;
-
   openModal() {
     this.isModalOpen = true;
   }
-
   onModalClose() {
     this.isModalOpen = false;
   }

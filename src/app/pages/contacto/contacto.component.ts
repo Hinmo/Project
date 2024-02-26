@@ -20,7 +20,7 @@ export class ContactoComponent {
       Validators.required,
       Validators.email
     ]),
-    message: new FormControl('mensaje por defecto'),
+    message: new FormControl(''),
 
   });
 

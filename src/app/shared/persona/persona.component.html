@@ -21,4 +21,5 @@
 
 <app-modal [isOpen]="isModalOpen" (closeModalEvent)="onModalClose()">
     <p>contenido aqui</p>
+    <button (click)="onModalClose()" class="absolute text-4xl top-6 right-6 hover:text-orange-500"><i class="fa-solid fa-xmark"></i></button>
 </app-modal>
