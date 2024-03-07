@@ -12,6 +12,31 @@ import { LoginComponent } from "../../auth/login/login.component";
 })
 export class HeaderComponent {
 
+  ifAdmin: boolean= true;
+
+  //submenus-Admin
+  // Variable para habilitar los sub menús
+  showHistory = false;
+  showClients = false;
+  // Funcion para los submenús
+  toggleSubMenu(entrada: string): void {
+    if (entrada === 'clients') {
+      this.showClients = !this.showClients;
+    } else if (entrada === 'history') {
+      this.showHistory = !this.showHistory;
+    }
+  }
+  // Funcion para los el bg de los botones del navbar
+  isButtonActive: boolean = false;
+  isButtonActivePerson: boolean = false;
+
+  toggleButton() {
+    this.isButtonActive = !this.isButtonActive;
+  }
+  toggleButtonPerson() {
+    this.isButtonActivePerson = !this.isButtonActivePerson;
+  }
+
   //modalReutilizable
   isModalOpen: boolean = false;
   openModal() {

@@ -10,7 +10,7 @@
     margin: 4px 2px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    background-image: linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red);
+    background-image: linear-gradient(to right, rgb(130, 189, 238), indigo, blue, green, yellow, orange, red);
     background-size: 1500% 1500%;
     animation: rainbow 10s linear infinite;
 }

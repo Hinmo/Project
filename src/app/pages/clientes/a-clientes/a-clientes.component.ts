@@ -29,9 +29,9 @@ export class AClientesComponent implements OnInit, OnChanges {
     }
   }
 
-  private inicializarFormulario(): void {
+  inicializarFormulario(): void {
     this.clienteForm = this.fb.group({
-      id: [this.cliente?.id || '', [Validators.required]],
+      id: [this.cliente?._id || '', [Validators.required]],
       nombre: [this.cliente?.nombre || '', [Validators.required]],
       direccion: [this.cliente?.direccion || '', [Validators.required]],
       telefono: [this.cliente?.telefono || '', [Validators.required]],
@@ -46,7 +46,7 @@ export class AClientesComponent implements OnInit, OnChanges {
     if (this.clienteForm.valid) {
       const data = this.clienteForm.value;
       const nuevoCliente: Cliente = {
-        id: Number(data.id),
+        _id: Number(data.id),
         nombre: data.nombre || '',
         direccion: data.direccion || '',
         telefono: data.telefono || '',
