@@ -3,6 +3,8 @@ import { Cliente } from '../../../core/interfaces/cliente';
 import { TableComponent } from '../../../components/table/table.component';
 import { AClientesComponent } from '../a-clientes/a-clientes.component';
 import { ClientesService } from '../../../services/clientes/clientes.service';
+import { Router } from '@angular/router';
+import { ClienteModel } from '../../../core/models/cliente.model';
 //
 @Component({
   selector: 'app-v-clientes',
@@ -34,14 +36,25 @@ export class VClientesComponent implements OnInit {
     estado: 'Estado',
   };
 
-  misClientes: Cliente[] = [];
+  misClientes: ClienteModel[] = [];
   clienteEnEdicion: Cliente | null = null;
 
-  constructor(private clienteService: ClientesService) {}
+  constructor(private clienteService: ClientesService, private router: Router, ) {}
 
  ngOnInit(): void {
     this.clienteService.getClientes().subscribe((data: any)=>{
       this.misClientes = data.clientes;
+    });
+    this.misClientes = this.transformarClientes(this.misClientes);
+  }
+
+  //transformar el estado de boolean a Activo-Inactivo
+  transformarClientes(clientes: ClienteModel[]): any[] {
+    return clientes.map(cliente => {
+      return {
+        ...cliente,
+        estado: cliente.estado ? 'Activo' : 'Inactivo'
+      };
     });
   }
 
@@ -49,18 +62,29 @@ export class VClientesComponent implements OnInit {
     this.clienteEnEdicion = cliente;
   }
 
-  agregarCliente(cliente: Cliente) {   
-    if (this.clienteEnEdicion) {                      
+  agregarCliente(cliente: ClienteModel) {
+    const data: ClienteModel = cliente;  
+      if (this.clienteEnEdicion) {                      
       const index = this.misClientes.findIndex(
         (cliente) => cliente._id === this.clienteEnEdicion?._id         //aqui comprueba si el modal esta en edicion
       );
       if (index !== -1) {
-        this.misClientes[index] = cliente;                          //aqui llenas con la info el modal y le reasignas el valor nuevo de haber cambios
+        this.misClientes[index] = cliente;
         this.clienteEnEdicion = null;
       }
     } else {
-      this.misClientes = [...this.misClientes, cliente];    //proceso normal de creacion
+      this.clienteService.crearClientes(data).subscribe({
+        next: (resp: any) => {
+          console.log("usuario creado", resp);
+        },
+        error: (error: any) =>{
+          console.log("error al crear", error);
+        }
+      });    //proceso normal de creacion
     }
-    //this.cModal();
+    
+    console.log("estoy aqui", data);
   }
 }
+
+// this.router.navigateByUrl(`add-clientes#path`)

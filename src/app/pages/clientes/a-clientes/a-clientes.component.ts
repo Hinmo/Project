@@ -31,14 +31,14 @@ export class AClientesComponent implements OnInit, OnChanges {
 
   inicializarFormulario(): void {
     this.clienteForm = this.fb.group({
-      id: [this.cliente?._id || '', [Validators.required]],
+      id: [this.cliente?._id || '',],
       nombre: [this.cliente?.nombre || '', [Validators.required]],
       direccion: [this.cliente?.direccion || '', [Validators.required]],
       telefono: [this.cliente?.telefono || '', [Validators.required]],
       email: [this.cliente?.email || '', [Validators.required, Validators.email]],
       tDocumento: [this.cliente?.tDocumento || '', [Validators.required]],
       nDocumento: [this.cliente?.nDocumento || '', [Validators.required]],
-      estado: [this.cliente?.estado ? 'activo' : 'inactivo', [Validators.required]],
+      estado: [this.cliente?.estado ? 'activo' : 'inactivo',],
     });
   }
 
@@ -46,7 +46,7 @@ export class AClientesComponent implements OnInit, OnChanges {
     if (this.clienteForm.valid) {
       const data = this.clienteForm.value;
       const nuevoCliente: Cliente = {
-        _id: Number(data.id),
+        _id: data.id || null,
         nombre: data.nombre || '',
         direccion: data.direccion || '',
         telefono: data.telefono || '',

@@ -12,7 +12,7 @@ import { LoginComponent } from "../../auth/login/login.component";
 })
 export class HeaderComponent {
 
-  ifAdmin: boolean= true;
+  ifAdmin: boolean= false;
 
   //submenus-Admin
   // Variable para habilitar los sub menús
