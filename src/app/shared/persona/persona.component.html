@@ -3,14 +3,10 @@
     <p>{{edad}}</p>
 </div>
 
-<div class="max-w-6xl mx-auto">
-    <button class="w3-button w3-blue w3-hover-text-blue w3-margin w3-border" (click)="mostrarModal()"> modal!</button>
-</div>
-
 
 <div class="max-w-6xl mx-auto">
 
-    <app-table [header]="['id', 'name']" [data]="users" [headerMapping]="{'id':'ID', 'name':'Nombre'}"></app-table>
+    <app-table [header]="['identificacion', 'name']" [data]="users" [headerMapping]="{'identificacion':'ID', 'name':'Nombre'}"></app-table>
 
     <h1>Este es el contador</h1>
     <app-counter
@@ -20,3 +16,10 @@
     ></app-counter>
     <p>subiendo.... = {{ receptor }}</p>
 </div>
+
+<button class="btn" (click)="openModal()">vanilla</button>
+
+<app-modal [isOpen]="isModalOpen" (closeModalEvent)="onModalClose()">
+    <p>contenido aqui</p>
+    <button (click)="onModalClose()" class="absolute text-4xl top-6 right-6 hover:text-orange-500"><i class="fa-solid fa-xmark"></i></button>
+</app-modal>

@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Cliente } from '../../../core/interfaces/cliente';
 import { TableComponent } from '../../../components/table/table.component';
 import { AClientesComponent } from '../a-clientes/a-clientes.component';
-
+import { ClientesService } from '../../../services/clientes/clientes.service';
+import { Router } from '@angular/router';
+import { ClienteModel } from '../../../core/models/cliente.model';
+//
 @Component({
   selector: 'app-v-clientes',
   standalone: true,
@@ -11,8 +14,9 @@ import { AClientesComponent } from '../a-clientes/a-clientes.component';
   imports: [TableComponent, AClientesComponent],
 })
 export class VClientesComponent implements OnInit {
+  @Output() editarClienteEvent = new EventEmitter<Cliente>();
+
   headNames: string[] = [
-    'id',
     'nombre',
     'direccion',
     'telefono',
@@ -23,7 +27,6 @@ export class VClientesComponent implements OnInit {
   ];
 
   headMap: { [key: string]: string } = {
-    id: 'ID',
     nombre: 'Nombre',
     direccion: 'Dirección',
     telefono: 'Teléfono',
@@ -33,68 +36,55 @@ export class VClientesComponent implements OnInit {
     estado: 'Estado',
   };
 
-  misClientes: Cliente[] = [];
+  misClientes: ClienteModel[] = [];
+  clienteEnEdicion: Cliente | null = null;
 
-  ngOnInit(): void {
-    this.misClientes.push(
-      {
-        id: 1,
-        nombre: 'Mario',
-        direccion: 'cra 63 9-07 sur',
-        telefono: '+57 3213765831',
-        email: 'jorjuroba@gmail.com',
-        tDocumento: 'Cc',
-        nDocumento: '1130609314',
-        estado: true,
-      },
-      {
-        id: 2,
-        nombre: 'Brayan',
-        direccion: 'cra 13a 13a-07',
-        telefono: '+57 3052083',
-        email: 'brayan@gmail.com',
-        tDocumento: 'Cc',
-        nDocumento: '1130558998',
-        estado: true,
-      },
-      {
-        id: 3,
-        nombre: 'Giova',
-        direccion: 'cra 13a 13a-07',
-        telefono: '+57 3052083',
-        email: 'giova@gmail.com',
-        tDocumento: 'Cc',
-        nDocumento: '1130584211',
-        estado: true,
-      }
-    );
+  constructor(private clienteService: ClientesService, private router: Router, ) {}
 
-    this.misClientes.forEach((cliente) => {
-      console.log('mis clientes', cliente);
+ ngOnInit(): void {
+    this.clienteService.getClientes().subscribe((data: any)=>{
+      this.misClientes = data.clientes;
+    });
+    this.misClientes = this.transformarClientes(this.misClientes);
+  }
+
+  //transformar el estado de boolean a Activo-Inactivo
+  transformarClientes(clientes: ClienteModel[]): any[] {
+    return clientes.map(cliente => {
+      return {
+        ...cliente,
+        estado: cliente.estado ? 'Activo' : 'Inactivo'
+      };
     });
   }
 
-  //mi modal
-  isModalOpen = false;
-
-  aModal() {
-    this.isModalOpen = true;
+   editarCliente(cliente: Cliente): void {
+    this.clienteEnEdicion = cliente;
   }
 
-  cModal() {
-    this.isModalOpen = false;
+  agregarCliente(cliente: ClienteModel) {
+    const data: ClienteModel = cliente;  
+      if (this.clienteEnEdicion) {                      
+      const index = this.misClientes.findIndex(
+        (cliente) => cliente._id === this.clienteEnEdicion?._id         //aqui comprueba si el modal esta en edicion
+      );
+      if (index !== -1) {
+        this.misClientes[index] = cliente;
+        this.clienteEnEdicion = null;
+      }
+    } else {
+      this.clienteService.crearClientes(data).subscribe({
+        next: (resp: any) => {
+          console.log("usuario creado", resp);
+        },
+        error: (error: any) =>{
+          console.log("error al crear", error);
+        }
+      });    //proceso normal de creacion
+    }
+    
+    console.log("estoy aqui", data);
   }
-  //fin modal funciones
-
-  // revisar
-  agregarCliente(cliente: Cliente) {
-    this.misClientes = [...this.misClientes, cliente];
-    this.cModal();
-  }
-
- /*  deleteClient(idCliente: number): void {
-    this.misClientes = this.misClientes.filter(
-      (cliente) => cliente.id !== idCliente
-    );
-  } */
 }
+
+// this.router.navigateByUrl(`add-clientes#path`)
