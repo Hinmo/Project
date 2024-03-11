@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Cliente } from '../../../core/interfaces/cliente';
 import { ModalService } from '../../../services/modal.service';
+import { ClienteModel } from '../../../core/models/cliente.model';
 
 @Component({
   selector: 'app-a-clientes',
@@ -12,8 +12,8 @@ import { ModalService } from '../../../services/modal.service';
 })
 
 export class AClientesComponent implements OnInit, OnChanges {
-  @Input() cliente: Cliente | null = null;
-  @Output() clienteCreado = new EventEmitter<Cliente>();
+  @Input() cliente: ClienteModel | null = null;
+  @Output() clienteCreado = new EventEmitter<ClienteModel>();
 
   clienteForm: FormGroup = {} as FormGroup;
 
@@ -45,7 +45,7 @@ export class AClientesComponent implements OnInit, OnChanges {
   onSubmit(): void {
     if (this.clienteForm.valid) {
       const data = this.clienteForm.value;
-      const nuevoCliente: Cliente = {
+      const nuevoCliente: ClienteModel = {
         _id: data.id || null,
         nombre: data.nombre || '',
         direccion: data.direccion || '',
@@ -63,7 +63,7 @@ export class AClientesComponent implements OnInit, OnChanges {
 
   onCancel(): void {
     this.clienteForm.reset();
-    this.modalService.close();
     this.cliente = null;
+    this.modalService.close();
   }
 }

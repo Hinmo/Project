@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ModalComponent } from "../../components/modal/modal.component";
 import { LoginComponent } from "../../auth/login/login.component";
+import { AutenticacionService } from '../../services/autenticacion/autenticacion.service';
 
 @Component({
     selector: 'app-header',
@@ -10,9 +11,15 @@ import { LoginComponent } from "../../auth/login/login.component";
     styleUrl: './header.component.css',
     imports: [RouterLink, ModalComponent, LoginComponent]
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
-  ifAdmin: boolean= false;
+  constructor(private auth: AutenticacionService) { }
+
+  ngOnInit(): void {
+    
+  }
+
+  ifRol: boolean= true;
 
   //submenus-Admin
   // Variable para habilitar los sub menús
@@ -43,6 +50,11 @@ export class HeaderComponent {
     this.isModalOpen = true;
   }
   onModalClose() {
+    this.isModalOpen = false;
+  }
+
+  onLoginSuccess() {
+    // Cerrar el modal
     this.isModalOpen = false;
   }
 

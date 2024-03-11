@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Cliente } from '../../../core/interfaces/cliente';
 import { TableComponent } from '../../../components/table/table.component';
 import { AClientesComponent } from '../a-clientes/a-clientes.component';
 import { ClientesService } from '../../../services/clientes/clientes.service';
@@ -14,7 +13,6 @@ import { ClienteModel } from '../../../core/models/cliente.model';
   imports: [TableComponent, AClientesComponent],
 })
 export class VClientesComponent implements OnInit {
-  @Output() editarClienteEvent = new EventEmitter<Cliente>();
 
   headNames: string[] = [
     'nombre',
@@ -37,54 +35,62 @@ export class VClientesComponent implements OnInit {
   };
 
   misClientes: ClienteModel[] = [];
-  clienteEnEdicion: Cliente | null = null;
+  clienteEnEdicion: ClienteModel | null = null;
 
   constructor(private clienteService: ClientesService, private router: Router, ) {}
 
- ngOnInit(): void {
-    this.clienteService.getClientes().subscribe((data: any)=>{
-      this.misClientes = data.clientes;
-    });
-    this.misClientes = this.transformarClientes(this.misClientes);
+  ngOnInit(): void {
+    this.obtenerClientes();
   }
 
-  //transformar el estado de boolean a Activo-Inactivo
+  obtenerClientes(): void {
+    this.clienteService.getClientes().subscribe((data: any) => {
+      this.misClientes = this.transformarClientes(data.clientes);
+    });
+  }
+
+  //transformar el estado de boolean a Activo-Inactivo y ordenar
   transformarClientes(clientes: ClienteModel[]): any[] {
-    return clientes.map(cliente => {
-      return {
-        ...cliente,
-        estado: cliente.estado ? 'Activo' : 'Inactivo'
-      };
-    });
+    return clientes.map(cliente => ({ ...cliente, estado: cliente.estado ? 'Activo' : 'Inactivo' }))
+    .sort((a, b) => a.nombre.localeCompare(b.nombre));
   }
 
-   editarCliente(cliente: Cliente): void {
+  editarCliente(cliente: ClienteModel): void {
     this.clienteEnEdicion = cliente;
   }
 
   agregarCliente(cliente: ClienteModel) {
-    const data: ClienteModel = cliente;  
-      if (this.clienteEnEdicion) {                      
-      const index = this.misClientes.findIndex(
-        (cliente) => cliente._id === this.clienteEnEdicion?._id         //aqui comprueba si el modal esta en edicion
-      );
-      if (index !== -1) {
-        this.misClientes[index] = cliente;
-        this.clienteEnEdicion = null;
+    if (this.clienteEnEdicion) {                      
+      // Si hay un cliente en edición, entonces estamos editando, no creando uno nuevo
+      const clienteId = this.clienteEnEdicion._id; // Acceder a la propiedad _id solo si clienteEnEdicion no es undefined
+      if (clienteId) {
+        this.clienteService.editarCliente(clienteId, cliente).subscribe({
+          next: (resp: any) => {
+            console.log("Cliente editado", resp);
+            // Actualizar la lista de clientes después de recibir la confirmación del servidor
+            this.obtenerClientes();
+            // Reiniciar la variable de cliente en edición
+            this.clienteEnEdicion = null;
+          },
+          error: (error: any) =>{
+            console.log("Error al editar", error);
+          }
+        });
+      } else {
+        console.log("El cliente en edición no tiene un ID definido. No se puede editar.");
       }
     } else {
-      this.clienteService.crearClientes(data).subscribe({
+      // Si no hay cliente en edición, entonces estamos creando un nuevo cliente
+      this.clienteService.crearClientes(cliente).subscribe({
         next: (resp: any) => {
-          console.log("usuario creado", resp);
+          console.log("Cliente creado", resp);
+          // Actualizar la lista de clientes después de recibir la confirmación del servidor
+          this.obtenerClientes();
         },
         error: (error: any) =>{
-          console.log("error al crear", error);
+          console.log("Error al crear", error);
         }
-      });    //proceso normal de creacion
+      });
     }
-    
-    console.log("estoy aqui", data);
-  }
+  }  
 }
-
-// this.router.navigateByUrl(`add-clientes#path`)

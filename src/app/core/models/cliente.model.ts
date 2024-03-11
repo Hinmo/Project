@@ -9,7 +9,7 @@ export class ClienteModel{
         public createdAt?: Date,
         public updatedAt?: Date,
         public direccion?: string,
-        public readonly _id?: number,
+        public readonly _id?: string,
     )
     {}
 }

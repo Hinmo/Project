@@ -31,7 +31,7 @@
       <h1 class="text-4xl">Proyecto Estudio</h1>
     </a>
     <nav class="hidden lg:block space-x-6 space-y-2">
-      <a routerLink="qsomos" class=" hover:text-orange-500 ">Quiénes somos</a>
+      <a href="#qsomos" class=" hover:text-orange-500 ">Quiénes somos</a>
       <a routerLink="clientes" class=" hover:text-orange-500 ">Servicios</a>
       <a href="#contacto" class=" hover:text-orange-500 ">Contacto</a>
     </nav>
@@ -44,13 +44,13 @@
 </header>
 
 <app-modal [isOpen]="isModalOpen" (closeModalEvent)="onModalClose()">
-  <app-login></app-login>
+  <app-login (loginSuccess)="onLoginSuccess()"></app-login>
   <button (click)="onModalClose()" class="absolute text-4xl top-6 right-6 hover:text-orange-500"><i class="fa-solid fa-xmark"></i></button>
 </app-modal>
 
-<!-- admin menu -->
+<!-- ...admin menu... -->
 
-@if (ifAdmin) {
+@if (ifRol) {
   <nav
     id="logo-sidebar"
     class="fixed top-auto left-0 z-40 w-64 h-screen pt-24 transition-transform -translate-x-full bg-sky-900 border-r border-t border-gray-200 sm:translate-x-0"
@@ -60,7 +60,7 @@
       <ul class="flex-grow space-y-2">
         <li>
           <a
-            href="#"
+            routerLink="usuarios"
             class="flex items-center p-2 text-sky-100 rounded-lg hover:bg-sky-100 hover:text-gray-900 group"
           >
             <svg
@@ -300,6 +300,6 @@
   </nav>
   }
 
-<div [class]="ifAdmin ? 'sm:ml-64' : 'w-full'">
+<div [class]="ifRol ? 'sm:ml-64' : 'w-full'">
   <ng-content></ng-content>
 </div>

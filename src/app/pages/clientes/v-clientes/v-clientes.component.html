@@ -1,10 +1,6 @@
 <section class="max-w-6xl mx-auto p-6">
   <h1 class="text-2xl font-bold mb-4">Clientes</h1>
-  <app-table [header]="headNames" [data]="misClientes" [headerMapping]="headMap" [showAction]="true" (editItem)="editarCliente($event)">
+  <app-table [header]="headNames" [data]="misClientes" [headerMapping]="headMap" [showAction]="true" [agregarItem]="true" (editItem)="editarCliente($event)">
     <app-a-clientes [cliente]="clienteEnEdicion" (clienteCreado)="agregarCliente($event)"></app-a-clientes>
   </app-table>
 </section>
-      
-
-
-

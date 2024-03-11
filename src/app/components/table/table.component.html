@@ -1,19 +1,20 @@
 <div class="overflow-x-auto">
-    <table class="w-full flex flex-row my-5 text-sm sm:table text-center">
+    <input type="text" [(ngModel)]="searchTerm" (keyup)="filterData()" placeholder="Buscar..." class="mb-2 h-8 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-sky-900 focus:border-sky-900">
+    <table class="w-full flex flex-row my-5 text-sm sm:table text-center table-auto">
         <thead class="text-sky-100">
             @for (item of data; track $index) {
             <tr class="bg-sky-900 flex flex-col sm:table-row sm:rounded-none mb-2 sm:mb-0">
                 @for (column of header; track $index) {
-                <th class="p-2 border border-sky-100">{{headerMapping[column]}}</th>
+                <th class="p-2 border border-sky-900">{{headerMapping[column]}}</th>
                 }
                 @if (showAction) {
-                <th class="p-2 border border-sky-100 h-12 sm:h-auto">Acciones</th>
+                <th class="p-2 border border-sky-900 h-12 sm:h-auto">Acciones</th>
                 }
             </tr>
             }
         </thead>
         <tbody class="flex-1 sm:flex-none">
-            @for (item of data; track $index) {
+            @for (item of filteredData; track $index) {
             <tr class="flex flex-col sm:table-row mb-2 sm:mb-0 md:odd:bg-slate-100 text-sky-900"> 
                 @for (column of header; track $index) {
                 <td class="p-2 border border-sky-900">{{ item[column] }}</td>
@@ -28,10 +29,12 @@
             }
         </tbody>
     </table>
+    @if (agregarItem) {
+    <a (click)="openModal()" class="flex space-x-2 text-sky-900 hover:text-orange-500 pr-4 cursor-pointer w-12">
+        <i class="fa-solid fa-plus text-4xl"></i><p class=" mt-2">Agregar</p>
+    </a>
+    }
 </div>
-<a (click)="openModal()" class="flex space-x-2 text-sky-900 hover:text-orange-500 pr-4 cursor-pointer">
-    <i class="fa-solid fa-plus text-4xl"></i><p class=" mt-2">Agregar</p>
-</a>
 
 <app-modal [isOpen]="isModalOpen" (closeModalEvent)="onModalClose()">
     <ng-content></ng-content>
